@@ -28,9 +28,15 @@ export default function Registration() {
 
             console.log(data);
 
-            alert("User Registered Successfully");
+            if (data.message)
+                alert(data.message);
+            else
+                alert("Registration successful");
         } catch (err) {
-            console.log(err);
+            //console.log(err);
+            if (err.code == "23505") {
+                alert("Email already exists");
+            }
         }
 
     };
@@ -41,13 +47,13 @@ export default function Registration() {
             <h1>Registration Form</h1>
             <form onSubmit={handleSubmit}>
                 <label>Name:
-                    <input type="text" name="name" onChange={handleChange} />
+                    <input type="text" name="name" onChange={handleChange} required />
                 </label>
                 <label>Email:
-                    <input type="email" name="email" onChange={handleChange} />
+                    <input type="email" name="email" onChange={handleChange} required />
                 </label>
                 <label>Password:
-                    <input type="password" name="password" onChange={handleChange} />
+                    <input type="password" name="password" onChange={handleChange} required />
                 </label>
                 <button type="submit">Register</button>
             </form>
