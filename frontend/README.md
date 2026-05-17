@@ -1,16 +1,112 @@
-# React + Vite
+# Full Stack React + Node Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Step 1: Create Main Project Folder
 
-Currently, two official plugins are available:
+```bash
+mkdir my-fullstack-app
+cd my-fullstack-app
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Step 2: Create Frontend Using Vite
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm create vite@latest frontend
+```
 
-## Expanding the ESLint configuration
+Selected:
+- React
+- JavaScript
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Install dependencies:
+
+```bash
+cd frontend
+npm install
+```
+
+Run frontend:
+
+```bash
+npm run dev
+```
+
+Frontend runs on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+## Step 3: Create Backend
+
+Open another terminal:
+
+```bash
+cd ..
+mkdir backend
+cd backend
+```
+
+Initialize backend:
+
+```bash
+npm init -y
+```
+
+Install packages:
+
+```bash
+npm install express cors nodemon
+```
+
+---
+
+## Step 4: Create Express Server
+
+Created `server.js`
+
+---
+
+## Step 5: Add Start Script
+
+Updated `package.json`
+
+```json
+"scripts": {
+  "start": "nodemon server.js"
+}
+```
+
+Run backend:
+
+```bash
+npm start
+```
+
+Backend runs on:
+
+```bash
+http://localhost:5000
+```
+
+---
+
+## Step 6: Connect Frontend to Backend
+
+Frontend successfully receives data from backend.
+
+---
+
+# Concepts Learned
+
+- React frontend setup
+- Node + Express backend setup
+- API creation
+- `fetch()` requests
+- `useEffect()`
+- CORS
+- JSON response handling
+- Connecting frontend and backend
