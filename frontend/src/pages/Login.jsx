@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 export default function Login() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -30,8 +32,13 @@ export default function Login() {
 
             if (data.message)
                 alert(data.message);
-            else
+            else {
                 alert("Login successful");
+                sessionStorage.setItem("accessToken", data.token);
+                console.log(sessionStorage.getItem("accessToken"));
+                console.log(data.token);
+                navigate('/home');
+            }
         } catch (err) {
             console.log(err);
         }
