@@ -1,31 +1,29 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-export default function Registration() {
-    const navigate = useNavigate();
+import { useState } from 'react'
+export default function Login() {
     const [formData, setFormData] = useState({
-        name: "",
         email: "",
         password: ""
-    });
+    })
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
-        })
+        }
+        )
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            const response = await fetch("http://localhost:5000/register", {
+            const response = await fetch("http://localhost:5000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(formData)
-            });
 
+            });
             const data = await response.json();
 
             console.log(data);
@@ -33,33 +31,23 @@ export default function Registration() {
             if (data.message)
                 alert(data.message);
             else
-                alert("Registration successful");
+                alert("Login successful");
         } catch (err) {
             console.log(err);
         }
-
-    };
-
-
+    }
     return (
         <>
-            <h1>Registration Form</h1>
+            <h1>Login Page</h1>
             <form onSubmit={handleSubmit}>
-                <label>Name:
-                    <input type="text" name="name" onChange={handleChange} required />
-                </label>
                 <label>Email:
                     <input type="email" name="email" onChange={handleChange} required />
                 </label>
                 <label>Password:
                     <input type="password" name="password" onChange={handleChange} required />
                 </label>
-                <button type="submit">Register</button>
+                <button type="Submit">Login</button>
             </form>
-            <h2>Already a user?</h2>
-            <br></br>
-            <button type="button" onClick={() => navigate('/login')}>Login page</button>
-
         </>
     )
 }

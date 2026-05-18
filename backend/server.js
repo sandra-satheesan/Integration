@@ -45,6 +45,37 @@ app.post("/register", async (req, res) => {
     }
 });
 
+app.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await pool.query(
+            "SELECT * FROM users WHERE email=$1", [email]
+        );
+
+        if (user.rows.length === 0) {
+            return res.json({
+                message: "User doesnt exist"
+            });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.rows[0].password);
+
+        if (!isMatch) {
+            return res.json({
+                message: "Wrong Password"
+            });
+        } else {
+            return res.json({
+                message: "Login Success"
+            })
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 
 app.listen(5000, () => {
     console.log("Server started on port 5000");
