@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { Pool } = require("pg")
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -65,14 +66,23 @@ app.post("/login", async (req, res) => {
             return res.json({
                 message: "Wrong Password"
             });
-        } else {
-            return res.json({
-                message: "Login Success"
-            })
         }
+        const token = jwt.sign(
+            {
+                id: user.rows[0].id,
+                email: user.rows[0].email
+            },
+            "SECRET_KEY",
+            { expiresIn: "1h" }
+        );
+
+        res.json({ token });
 
     } catch (err) {
         console.log(err);
+        res.status(500).json({
+            message: "Server error"
+        });
     }
 })
 
