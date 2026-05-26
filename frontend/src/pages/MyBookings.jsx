@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Layout from "../components/Layout";
-
-export default function Home() {
+import Navbar from "../components/Navbar";
+export default function MyBookings() {
     const navigate = useNavigate();
     useEffect(() => {
         const accessToken = sessionStorage.getItem("accessToken");
@@ -11,8 +10,9 @@ export default function Home() {
         }
     }, []);
     return (
-        <Layout>
-            <h1 className="text-3xl font-bold">Home</h1>
-        </Layout>
+        <>
+            <Navbar />
+            <h1>My Bookings</h1>
+        </>
     )
 }

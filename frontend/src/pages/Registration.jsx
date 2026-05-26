@@ -42,24 +42,75 @@ export default function Registration() {
 
 
     return (
-        <>
-            <h1>Registration Form</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Name:
-                    <input type="text" name="name" onChange={handleChange} required />
-                </label>
-                <label>Email:
-                    <input type="email" name="email" onChange={handleChange} required />
-                </label>
-                <label>Password:
-                    <input type="password" name="password" onChange={handleChange} required />
-                </label>
-                <button type="submit">Register</button>
-            </form>
-            <h2>Already a user?</h2>
-            <br></br>
-            <button type="button" onClick={() => navigate('/login')}>Login page</button>
 
-        </>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+
+            <div className="bg-white p-8 rounded-lg shadow-lg w-[400px]">
+
+                <h1 className="text-3xl font-bold mb-6 text-center">
+                    Registration Form
+                </h1>
+
+                <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-col gap-4"
+                >
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter Name"
+                        onChange={handleChange}
+                        className="border p-3 rounded"
+                        required
+                    />
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter Email"
+                        onChange={handleChange}
+                        className="border p-3 rounded"
+                        required
+                    />
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter Password"
+                        onChange={handleChange}
+                        className="border p-3 rounded"
+                        required
+                    />
+
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white p-3 rounded hover:bg-blue-600"
+                    >
+                        Register
+                    </button>
+
+                </form>
+
+                <p className="mt-5 text-center">
+                    Already a user?
+                </p>
+
+                <div className="flex justify-center mt-3">
+
+                    <button
+                        type="button"
+                        onClick={() => navigate('/login')}
+                        className="text-blue-500 hover:underline"
+                    >
+                        Login Page
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
     )
 }

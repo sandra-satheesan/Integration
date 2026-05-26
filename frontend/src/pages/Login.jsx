@@ -44,17 +44,15 @@ export default function Login() {
         }
     }
     return (
-        <>
-            <h1>Login Page</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Email:
-                    <input type="email" name="email" onChange={handleChange} required />
-                </label>
-                <label>Password:
-                    <input type="password" name="password" onChange={handleChange} required />
-                </label>
-                <button type="Submit">Login</button>
-            </form>
-        </>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-[400px]">
+                <h1 className="text-3x1 font-bold mb-6 text-center">Login Page</h1>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    <input type="email" name="email" placeholder="Enter Email" onChange={handleChange} className="border p-3 rounded" required />
+                    <input type="password" name="password" placeholder="Enter password" onChange={handleChange} className="border p-3 rounded" required />
+                    <button type="Submit" className="bg-blue-500 text-white p-3 rounded hover:bg-blue-600">Login</button>
+                </form>
+            </div>
+        </div>
     )
 }
