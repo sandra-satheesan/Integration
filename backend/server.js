@@ -3,6 +3,7 @@ const cors = require('cors');
 const { Pool } = require("pg")
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const authMiddleware = require('./middleware/authMiddleware');
 
 const app = express();
 
@@ -86,6 +87,56 @@ app.post("/login", async (req, res) => {
     }
 })
 
+app.get("/trains", async (req, res) => {
+    try {
+        const trains = await pool.query(
+            "SELECT * FROM trains"
+        );
+        res.json(trains.rows);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: "Server Error"
+        });
+    }
+})
+
+app.post("/book", authMiddleware, async (req, res) => {
+    try {
+        const { trainId } = req.body;
+        const userId = req.user.id;
+
+        await pool.query(
+            `INSERT INTO bookings
+            (user_id, train_id, seat_count)
+            VALUES ($1,  $2, $3)`,
+            [userId, trainId, 1]
+        );
+
+        res.json({
+            message: "Booking successful"
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+});
+
+app.get("/book", async (req, res) => {
+    try {
+        const bookings = await pool.query(
+            "SELECT * FROM bookings"
+        );
+        res.json(bookings.rows);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: "Server Error"
+        });
+    }
+})
 
 app.listen(5000, () => {
     console.log("Server started on port 5000");
